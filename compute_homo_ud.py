@@ -4,8 +4,8 @@ from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('images/xiaoyang.png', 0)
-img2 = cv2.imread('images/daozhi.png', 0)
+img1 = cv2.imread('images/xiaoyang.jpg', 0)
+img2 = cv2.imread('images/daozhi.jpg', 0)
 
 # Initiate SIFT detector
 sift = cv2.xfeatures2d.SIFT_create()

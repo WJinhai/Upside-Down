@@ -15,6 +15,10 @@ if __name__ == '__main__':
         oss_image_url = tokens[3].strip()
         oss_image_url = oss_image_url.split(',')[0].strip()
         result = int(tokens[4])
+        try:
+            real = int(tokens[5])
+        except ValueError:
+            real = 0
 
         folder = 'data/kkf'
         process = Popen(["wget", '-N', oss_filepath, "-P", folder], stdout=PIPE)
@@ -27,7 +31,7 @@ if __name__ == '__main__':
         exit_code = process.wait()
         xiaoyang_filename = oss_image_url[oss_image_url.rfind("/") + 1:]
 
-        samples.append({'idx': i, 'image': image_filename, 'xiaoyang': xiaoyang_filename, 'result': result})
+        samples.append({'idx': i, 'image': image_filename, 'xiaoyang': xiaoyang_filename, 'result': result, 'real': real})
 
         with open('data.pkl', 'wb') as f:
             pickle.dump(samples, f)

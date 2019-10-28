@@ -1,4 +1,3 @@
-import math
 import os
 import pickle
 
@@ -74,13 +73,28 @@ if __name__ == '__main__':
     with open('data.pkl', 'rb') as f:
         samples = pickle.load(f)
 
+    num_tests = 0
+    num_correct = 0
+
     for sample in samples:
         print(sample)
+        idx = sample['idx']
         tupian = sample['image']
         xiaoyang = sample['xiaoyang']
         result = sample['result']
+        is_real = sample['real']
+
         if result == 1:
             H = match(tupian, xiaoyang)
             roll = get_roll(H)
-            print(roll)
-            break
+            if roll > 1.57 or roll < -1.57:
+                to_real = 1
+            else:
+                to_real = 0
+            if is_real == to_real:
+                num_correct += 1
+            num_tests += 1
+
+    print('num_tests: ' + str(num_tests))
+    print('num_correct: ' + str(num_correct))
+    print('acc: ' + str(num_correct / num_tests))

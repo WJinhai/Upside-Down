@@ -3,7 +3,7 @@ import pickle
 
 import cv2
 import numpy as np
-
+from tqdm import tqdm
 from utils import isRotationMatrix, rotationMatrixToEulerAngles
 
 
@@ -37,7 +37,7 @@ def match(tupian, xiaoyang):
         if m.distance < 0.7 * n.distance:
             good.append(m)
 
-    print(len(good))
+    # print(len(good))
     if len(good) > MIN_MATCH_COUNT:
         src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
         dst_pts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
@@ -76,8 +76,8 @@ if __name__ == '__main__':
     num_tests = 0
     num_correct = 0
 
-    for sample in samples:
-        print(sample)
+    for sample in tqdm(samples):
+        # print(sample)
         idx = sample['idx']
         tupian = sample['image']
         xiaoyang = sample['xiaoyang']

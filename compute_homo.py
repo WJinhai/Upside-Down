@@ -8,7 +8,8 @@ img1 = cv2.imread('images/xiaoyang.png', 0)
 img2 = cv2.imread('images/tupian.png', 0)
 
 # Initiate SIFT detector
-sift = cv2.xfeatures2d.SIFT_create()
+# sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.xfeatures2d.SURF_create()
 
 # find the keypoints and descriptors with SIFT
 kp1, des1 = sift.detectAndCompute(img1, None)
